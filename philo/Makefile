@@ -6,14 +6,14 @@
 #    By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/30 14:23:25 by aguiri            #+#    #+#              #
-#    Updated: 2022/05/29 02:05:42 by aguiri           ###   ########.fr        #
+#    Updated: 2022/06/21 14:16:07 by aguiri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME				?=	name
+NAME				?=	philo
 
 CC					=	gcc
-CFLAGS				?=	-Wall -Wextra -Werror
+CFLAGS				?=	-Wall -Wextra -Werror -pthread
 AR 					?=	ar
 RM					?=	rm -f
 MKDIR				?=	mkdir -p
@@ -45,9 +45,6 @@ WHITE				:=	"\033[37m"
 SRCS_PATH			:=	src
 OBJS_PATH			:=	bin
 HDRS_PATH			:=	include
-LIBS_PATH			:=	lib
-
-LIBFT_PATH			:=	$(LIBS_PATH)/libft
 
 # ********************************* N A M E S *********************************
 
@@ -56,16 +53,7 @@ OBJS 				:=	$(addprefix $(OBJS_PATH)/, $(SRCS:$(SRCS_PATH)/%.c=%.o))
 
 # ********************************* H E A D S *********************************
 
-HFLAGS				:=	-I $(HDRS_PATH)\
-						-I $(LIBFT_PATH)/$(HDRS_PATH)
-
-# ********************************** L I B S **********************************
-
-# Libft
-FTFLAGS				:=	-L./$(LIBFT_PATH)\
-						-lft
-
-LFLAGS				:=	$(FTFLAGS)
+HFLAGS				:=	-I $(HDRS_PATH)
 
 # ********************************* N O R M E *********************************
 
@@ -106,22 +94,5 @@ re:					fclean all
 norme:				$(NAME)
 					@$(NRM) $(NFLAGS) $(HDRS_PATH) $(SRCS_PATH)
 
-lib:				libft mlx
-					mlx mlx_clean mlx_re
-					mlx mlx_clean mlx_re
-
-libft:				
-					@$(MAKE) -C ./$(LIBFT_PATH)
-
-libft_clean:
-					@$(MAKE) -C ./$(LIBFT_PATH) clean
-
-libft_fclean:		
-					@$(MAKE) -C ./$(LIBFT_PATH) fclean
-
-libft_re:		
-					@$(MAKE) -C ./$(LIBFT_PATH) re
-
 .PHONY:				all clean fclean re\
-					norme lib\
-					libft libft_clean libft_fclean libft_re
+					norme
