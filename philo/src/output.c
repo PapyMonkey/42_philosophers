@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   output.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 14:16:37 by aguiri            #+#    #+#             */
-/*   Updated: 2022/06/23 14:04:30 by aguiri           ###   ########.fr       */
+/*   Created: 2022/06/23 13:01:35 by aguiri            #+#    #+#             */
+/*   Updated: 2022/06/23 14:47:28 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int argc, char **argv)
+void	print_action(t_phi *phi, char *msg)
 {
-	t_var	var;
-
-	init_all(&var, argc, argv);
-	return (0);
+	if (msg != NULL)
+	{
+		pthread_mutex_lock(&phi->var->m_printing);
+		if (!phi->var->is_dead)
+			printf("%zu %d %s\n",
+				t_get_mil_start(phi->var),
+				phi->serial,
+				msg);
+		pthread_mutex_unlock(&phi->var->m_printing);
+	}
 }

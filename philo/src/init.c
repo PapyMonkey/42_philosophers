@@ -6,7 +6,7 @@
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:00:36 by aguiri            #+#    #+#             */
-/*   Updated: 2022/06/22 19:25:05 by aguiri           ###   ########.fr       */
+/*   Updated: 2022/06/23 15:12:42 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ static void	init_forks(t_var *var)
 
 static void	init_philos_ext(t_var *var, t_phi *phi, int i)
 {
+	phi->var = var;
 	phi->n_lunch = 0;
-	phi->n_lunch_max = var->n_lunch;
-	phi->t_die = var->t_die;
-	phi->t_eat = var->t_eat;
-	phi->t_sle = var->t_sle;
-	phi->i = var->test;
+	phi->serial = i + 1;
+	phi->is_eat = 0;
+	phi->is_sle = 0;
+	phi->t_last_meal = t_convert_mil(var->time);
 	if (i == 0)
 	{
 		phi->f_left = var->forks + (var->n_philo - 1);
@@ -89,11 +89,14 @@ void	init_all(t_var *var, int argc, char **argv)
 	var->t_eat = ft_atoi(argv[3]);
 	var->t_sle = ft_atoi(argv[4]);
 	if (argc == 6)
-		var->n_lunch = ft_atoi(argv[5]);
+		var->n_lunch_max = ft_atoi(argv[5]);
 	else
-		var->n_lunch = 0;
+		var->n_lunch_max = 0;
 	i = 0;
-	var->test = &i;
+	var->is_dead = 0;
+	var->time = t_get_now();
+	pthread_mutex_init(&(var->m_diying), NULL);
+	pthread_mutex_init(&(var->m_printing), NULL);
 	init_forks(var);
 	init_philos(var);
 }
