@@ -6,12 +6,17 @@
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 16:58:07 by aguiri            #+#    #+#             */
-/*   Updated: 2022/12/02 22:59:06 by aguiri           ###   ########.fr       */
+/*   Updated: 2022/12/02 23:04:16 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+/**
+@brief Routine to make the philosophers eat.
+
+@param phi Philosophers taking the action.
+*/
 static void	phi_eat(t_phi *phi)
 {
 	pthread_mutex_lock(phi->f_left);
@@ -29,6 +34,11 @@ static void	phi_eat(t_phi *phi)
 	pthread_mutex_unlock(phi->f_right);
 }
 
+/**
+@brief Routine to make the philosophers sleep.
+
+@param phi Philosophers taking the action.
+*/
 static void	phi_sle(t_phi *phi)
 {
 	phi->is_sle = 1;
@@ -37,6 +47,11 @@ static void	phi_sle(t_phi *phi)
 	phi->is_sle = 0;
 }
 
+/**
+@brief Routine to make the philosophers think.
+
+@param phi Philosophers taking the action.
+*/
 static void	phi_thi(t_phi *phi)
 {
 	print_action(phi, "is thinking");

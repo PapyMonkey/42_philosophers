@@ -6,7 +6,7 @@
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 14:17:15 by aguiri            #+#    #+#             */
-/*   Updated: 2022/12/02 22:59:12 by aguiri           ###   ########.fr       */
+/*   Updated: 2022/12/02 23:05:34 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@ void			stop_simulation(t_var *var);
 // Functions - philo.c
 
 /**
-@brief [TODO:description]
+@brief Core routine common to of all philosophers.
 
-@param arg [TODO:description]
+@param arg Structure containing all the other useful ones, recasted to t_var.
 */
 void			*phi_core(void *arg);
 

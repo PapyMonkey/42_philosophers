@@ -6,12 +6,17 @@
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:00:36 by aguiri            #+#    #+#             */
-/*   Updated: 2022/12/02 19:01:51 by aguiri           ###   ########.fr       */
+/*   Updated: 2022/12/02 22:55:48 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+/**
+@brief Malloc and initiate all forks mutex related.
+
+@param var Structure containing all the other useful ones.
+*/
 static void	init_forks(t_var *var)
 {
 	int	i;
@@ -24,7 +29,14 @@ static void	init_forks(t_var *var)
 		pthread_mutex_init(var->forks + i, NULL);
 }
 
-// NOTE : maybe not the right format for &phi_core
+/**
+@brief Extension of philos_ext. Malloc and initiate all the philosophers
+		related variables.
+
+@param var Structure containing all the other useful ones.
+@param phi Philosophers taking the action.
+@param i ID of philosopher.
+*/
 static void	init_philos_ext(t_var *var, t_phi *phi, int i)
 {
 	phi->var = var;
@@ -46,6 +58,11 @@ static void	init_philos_ext(t_var *var, t_phi *phi, int i)
 	pthread_create(&(phi->thread), NULL, &phi_core, (void *)phi);
 }
 
+/**
+@brief Malloc and initiate all the philosophers related variables.
+
+@param var Structure containing all the other useful ones.
+*/
 static void	init_philos(t_var *var)
 {
 	int	i;
