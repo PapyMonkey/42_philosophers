@@ -6,7 +6,7 @@
 #    By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/30 14:23:25 by aguiri            #+#    #+#              #
-#    Updated: 2022/06/21 14:16:07 by aguiri           ###   ########.fr        #
+#    Updated: 2022/12/02 13:52:40 by aguiri           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,10 @@ OBJS 				:=	$(addprefix $(OBJS_PATH)/, $(SRCS:$(SRCS_PATH)/%.c=%.o))
 
 HFLAGS				:=	-I $(HDRS_PATH)
 
+# ********************************** L I B S **********************************
+
+LFLAGS				:=	-lpthread
+
 # ********************************* N O R M E *********************************
 
 NRM					:=	norminette
@@ -72,7 +76,7 @@ $(OBJS_PATH)/%.o: 	$(SRCS_PATH)/%.c $(HDRS_PATH)
 
 
 $(NAME):			$(OBJS)
-					@$(CC) $(LFLAGS) $^ -o $@ 
+					@$(CC) $^ $(LFLAGS) -o $@ 
 					@$(ECHO)\
 					$(CYAN)$(UNDERLINE)"$@"$(EOC)": "$(GREEN)"complete"$(EOC)
 

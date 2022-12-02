@@ -6,7 +6,7 @@
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:23:39 by aguiri            #+#    #+#             */
-/*   Updated: 2022/06/23 14:45:45 by aguiri           ###   ########.fr       */
+/*   Updated: 2022/12/02 13:47:23 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 // Structures
 
 /**
- * struct s_phi - Contains all philosophers related variables.
- */
+struct s_phi - Contains all philosophers related variables.
+*/
 typedef struct s_phi {
 	struct s_var	*var;
 
@@ -37,8 +37,8 @@ typedef struct s_phi {
 }				t_phi;
 
 /**
- * struct s_var - Contains all the useful variables, used in all functions.
- */
+struct s_var - Contains all the useful variables, used in all functions.
+*/
 typedef struct s_var {
 	int				n_philo;
 	int				n_lunch_max;
@@ -56,4 +56,4 @@ typedef struct s_var {
 	struct timeval	time;
 }					t_var;
 
-#endif		// ifndef STRUCTURES_H
+#endif	// STRUCTURES_H

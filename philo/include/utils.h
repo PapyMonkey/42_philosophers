@@ -6,7 +6,7 @@
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:23:39 by aguiri            #+#    #+#             */
-/*   Updated: 2022/06/22 13:06:00 by aguiri           ###   ########.fr       */
+/*   Updated: 2022/12/02 13:47:08 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,23 @@
 // Functions - ft_atoi.c
 
 /**
- * @brief 		Converts the initial portion of the string pointed to by str to an 
- * 				int representation.
- * 
- * @param str 	String to be converted.
- * @return		Int representation of the initial portion of the string. 
- */
+@brief Converts the initial portion of the string pointed to by str to an 
+		int representation.
+
+@param str String to be converted.
+@return Int representation of the initial portion of the string. 
+*/
 int	ft_atoi(const char *str);
 
 // ****************************************************************************
 // Functions - ft_atoi.c
 
 /**
- * @brief   	Tests for a decimal digit character.
- * 
- * @param c 	Character to be tested. 
- * @return  	1 if True, 0 if False.
- */
+@brief Tests for a decimal digit character.
+
+@param c Character to be tested. 
+@return 1 if True, 0 if False.
+*/
 int	ft_isdigit(int c);
 
-#endif		// ifndef UTILS_H
+#endif	// UTILS_H
