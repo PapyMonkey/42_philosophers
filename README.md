@@ -32,6 +32,6 @@ Specific rules for the mandatory part are :
 | **Description** | `Philosophers with processes and semaphores` |
 
 Specific rules for the bonus part are :
-• All the forks are put in the middle of the table.
-• They have no states in memory but the number of available forks is represented by a semaphore.
-• Each philosopher should be a process. But the main process should not be a philosopher.
+- All the forks are put in the middle of the table.
+- They have no states in memory but the number of available forks is represented by a semaphore.
+- Each philosopher should be a process. But the main process should not be a philosopher.
