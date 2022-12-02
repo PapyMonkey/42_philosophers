@@ -6,30 +6,11 @@
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:00:36 by aguiri            #+#    #+#             */
-/*   Updated: 2022/06/23 15:12:42 by aguiri           ###   ########.fr       */
+/*   Updated: 2022/12/02 19:01:51 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-static void	args_check(int argc, char **argv)
-{
-	int		i;
-	char	*tmp;
-
-	if (argc < 5 || 6 < argc)
-		error_put_exit_custom("wrong number of arguments");
-	if (ft_atoi(argv[1]) < 1)
-		error_put_exit_custom("wrong number of philosophers");
-	i = 1;
-	while (i < argc)
-	{
-		tmp = argv[i++];
-		while (*tmp)
-			if (ft_isdigit(*tmp++) == 0)
-				error_put_exit_custom("non numeric argument(s)");
-	}
-}
 
 static void	init_forks(t_var *var)
 {
@@ -37,12 +18,13 @@ static void	init_forks(t_var *var)
 
 	var->forks = malloc(sizeof(pthread_mutex_t) * var->n_philo);
 	if (!var->forks)
-		error_put_exit_custom("malloc failed");
+		error_put_exit_custom("var.forks malloc failed");
 	i = -1;
 	while (++i < var->n_philo)
 		pthread_mutex_init(var->forks + i, NULL);
 }
 
+// NOTE : maybe not the right format for &phi_core
 static void	init_philos_ext(t_var *var, t_phi *phi, int i)
 {
 	phi->var = var;
@@ -61,7 +43,7 @@ static void	init_philos_ext(t_var *var, t_phi *phi, int i)
 		phi->f_left = var->forks + i - 1;
 		phi->f_right = var->forks + i;
 	}
-	pthread_create(&(phi->thread), NULL, phi_core, phi);
+	pthread_create(&(phi->thread), NULL, &phi_core, (void *)phi);
 }
 
 static void	init_philos(t_var *var)
@@ -70,20 +52,17 @@ static void	init_philos(t_var *var)
 
 	var->phi = malloc(sizeof(t_phi) * var->n_philo);
 	if (!var->phi)
-		error_put_exit_custom("malloc failed");
+		error_put_exit_custom("var->phi malloc failed");
 	i = -1;
 	while (++i < var->n_philo)
 		init_philos_ext(var, var->phi + i, i);
-	i = -1;
-	while (++i < var->n_philo)
-		pthread_join((var->phi + i)->thread, NULL);
 }
 
 void	init_all(t_var *var, int argc, char **argv)
 {
 	int	i;
 
-	args_check(argc, argv);
+	check_args(argc, argv);
 	var->n_philo = ft_atoi(argv[1]);
 	var->t_die = ft_atoi(argv[2]);
 	var->t_eat = ft_atoi(argv[3]);
@@ -99,4 +78,5 @@ void	init_all(t_var *var, int argc, char **argv)
 	pthread_mutex_init(&(var->m_printing), NULL);
 	init_forks(var);
 	init_philos(var);
+	check_dead(var);
 }

@@ -60,6 +60,8 @@ compile_commands.json
 
 # Custom rules
 .DS_Store
+philo
+philo_bonus
 
 # Subject files
 en.subject.pdf

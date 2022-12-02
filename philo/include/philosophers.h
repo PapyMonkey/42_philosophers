@@ -6,7 +6,7 @@
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 14:17:15 by aguiri            #+#    #+#             */
-/*   Updated: 2022/12/02 13:47:42 by aguiri           ###   ########.fr       */
+/*   Updated: 2022/12/02 22:28:50 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,24 @@
 # include "structures.h"
 
 // ****************************************************************************
+// Functions - check.c
+
+/**
+@brief Checks arguments given in program input.
+
+@param	argc Number of arguments to the main function.
+@param	argv Arguments of the main function.
+*/
+void			check_args(int argc, char **argv);
+
+/**
+@brief Checks if one of the philosophers died.
+
+@param var Variable that will contain all the other useful ones.
+*/
+void			check_dead(t_var *var);
+
+// ****************************************************************************
 // Functions - error.c
 
 /**
@@ -43,6 +61,16 @@ void			error_put_exit(void);
 void			error_put_exit_custom(char *msg);
 
 // ****************************************************************************
+// Functions - free.c
+
+/**
+@brief Frees the entire global structure.
+
+@param var Structure containing all the other useful ones.
+*/
+void			var_free(t_var *var);
+
+// ****************************************************************************
 // Functions - init.c
 
 /**
@@ -53,6 +81,16 @@ void			error_put_exit_custom(char *msg);
 @param argv Arguments of the main function.
 */
 void			init_all(t_var *var, int argc, char **argv);
+
+// ****************************************************************************
+// Functions - main.c
+
+/**
+@brief Stop the simulation and call the free functions.
+
+@param var Variable that will contain all the other useful ones.
+*/
+void			stop_simulation(t_var *var);
 
 // ****************************************************************************
 // Functions - philo.c
@@ -113,6 +151,6 @@ size_t			t_get_mil_start(t_var *var);
 
 @param usec	Time, in milliseconds.
  */
-void			t_usleep(size_t	usec);
+void			t_usleep(t_phi *phi, size_t	usec);
 
 #endif	//PHILOSOPHERS_H
