@@ -6,7 +6,7 @@
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 16:58:07 by aguiri            #+#    #+#             */
-/*   Updated: 2022/12/02 18:50:57 by aguiri           ###   ########.fr       */
+/*   Updated: 2022/12/02 22:59:06 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	phi_eat(t_phi *phi)
 	phi->is_eat = 1;
 	printf("Coucou je mange\n");
 	print_action(phi, "is eating");
-	t_usleep(phi, phi->var->t_eat);
+	t_usleep(phi->var->t_eat);
 	phi->n_lunch++;
 	phi->is_eat = 0;
 	pthread_mutex_unlock(phi->f_left);
@@ -33,7 +33,7 @@ static void	phi_sle(t_phi *phi)
 {
 	phi->is_sle = 1;
 	print_action(phi, "is sleeping");
-	t_usleep(phi, phi->var->t_sle);
+	t_usleep(phi->var->t_sle);
 	phi->is_sle = 0;
 }
 
@@ -48,7 +48,7 @@ void	*phi_core(void *arg)
 
 	phi = (t_phi *)arg;
 	if (!(phi->serial % 2))
-		t_usleep(phi, 10);
+		t_usleep(10);
 	while (!phi->var->is_dead)
 	{
 		phi_eat(phi);

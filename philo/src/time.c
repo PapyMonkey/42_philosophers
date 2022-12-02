@@ -6,7 +6,7 @@
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 13:18:12 by aguiri            #+#    #+#             */
-/*   Updated: 2022/12/02 18:11:18 by aguiri           ###   ########.fr       */
+/*   Updated: 2022/12/02 22:58:44 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ size_t	t_get_mil_start(t_var *var)
 	return (t_get_mil() - t_convert_mil(var->time));
 }
 
-void	t_usleep(t_phi *phi, size_t	t_to_wait)
+void	t_usleep(size_t	t_to_wait)
 {
 	size_t	t_start;
 

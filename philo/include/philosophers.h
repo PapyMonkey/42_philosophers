@@ -6,7 +6,7 @@
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 14:17:15 by aguiri            #+#    #+#             */
-/*   Updated: 2022/12/02 22:46:13 by aguiri           ###   ########.fr       */
+/*   Updated: 2022/12/02 22:59:12 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,6 @@ size_t			t_get_mil_start(t_var *var);
 
 @param usec	Time, in milliseconds.
  */
-void			t_usleep(t_phi *phi, size_t	usec);
+void			t_usleep(size_t	usec);
 
 #endif	//PHILOSOPHERS_H
