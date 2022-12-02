@@ -6,7 +6,7 @@
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 14:16:37 by aguiri            #+#    #+#             */
-/*   Updated: 2022/12/02 17:52:39 by aguiri           ###   ########.fr       */
+/*   Updated: 2022/12/02 22:45:22 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int	main(int argc, char **argv)
 	if (!var)
 		error_put_exit_custom("var malloc failed");
 	init_all(var, argc, argv);
+	free_all(var);
 	return (0);
 }

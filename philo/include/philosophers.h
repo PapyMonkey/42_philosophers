@@ -6,7 +6,7 @@
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 14:17:15 by aguiri            #+#    #+#             */
-/*   Updated: 2022/12/02 22:28:50 by aguiri           ###   ########.fr       */
+/*   Updated: 2022/12/02 22:46:13 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void			error_put_exit_custom(char *msg);
 
 @param var Structure containing all the other useful ones.
 */
-void			var_free(t_var *var);
+void			free_all(t_var *var);
 
 // ****************************************************************************
 // Functions - init.c
