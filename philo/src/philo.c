@@ -6,7 +6,7 @@
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 16:58:07 by aguiri            #+#    #+#             */
-/*   Updated: 2022/12/02 23:04:16 by aguiri           ###   ########.fr       */
+/*   Updated: 2022/12/02 23:08:00 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void	phi_eat(t_phi *phi)
 	print_action(phi, "has taken a fork");
 	phi->t_last_meal = t_get_mil();
 	phi->is_eat = 1;
-	printf("Coucou je mange\n");
 	print_action(phi, "is eating");
 	t_usleep(phi->var->t_eat);
 	phi->n_lunch++;
