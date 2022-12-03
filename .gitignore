@@ -61,7 +61,7 @@ compile_commands.json
 # Custom rules
 .DS_Store
 philo/philo
-philo/philo_bonus
+philo_bonus/philo_bonus
 
 # Subject files
 en.subject.pdf
