@@ -6,7 +6,7 @@
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 18:28:04 by aguiri            #+#    #+#             */
-/*   Updated: 2022/12/02 22:13:35 by aguiri           ###   ########.fr       */
+/*   Updated: 2022/12/04 01:31:03 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ void	check_dead(t_var *var)
 		{
 			if (var->phi[i].is_eat)
 				continue ;
-			pthread_mutex_lock(&(var->m_diying));
+			sem_wait(var->s_diying);
 			if (t_get_mil() >= var->t_die + var->phi[i].t_last_meal)
 			{
 				print_action(&(var->phi[i]), "died");
 				var->is_dead = 1;
 				return ;
 			}
-			pthread_mutex_unlock(&(var->m_diying));
+			sem_post(var->s_diying);
 		}
 		if (check_eat(var))
 			break ;

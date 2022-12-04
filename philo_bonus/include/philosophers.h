@@ -6,7 +6,7 @@
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 14:17:15 by aguiri            #+#    #+#             */
-/*   Updated: 2022/12/02 23:05:34 by aguiri           ###   ########.fr       */
+/*   Updated: 2022/12/04 01:18:12 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <sys/time.h>
 
 # include <pthread.h>
+# include <fcntl.h>
+# include <semaphore.h>
 
 # include "utils.h"
 # include "structures.h"

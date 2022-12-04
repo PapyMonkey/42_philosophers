@@ -6,27 +6,28 @@
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:00:36 by aguiri            #+#    #+#             */
-/*   Updated: 2022/12/02 22:55:48 by aguiri           ###   ########.fr       */
+/*   Updated: 2022/12/04 01:30:28 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
 /**
-@brief Malloc and initiate all forks mutex related.
+@brief Malloc and initiate a semaphore with a given name and value.
 
-@param var Structure containing all the other useful ones.
+@param name Name of the new semaphore.
+@param value Int value to be set.
+@return Pointer to the new created semaphore.
 */
-static void	init_forks(t_var *var)
+static sem_t	*init_semaphore(char *name, unsigned int value)
 {
-	int	i;
+	sem_t	*sem_out;
 
-	var->forks = malloc(sizeof(pthread_mutex_t) * var->n_philo);
-	if (!var->forks)
-		error_put_exit_custom("var.forks malloc failed");
-	i = -1;
-	while (++i < var->n_philo)
-		pthread_mutex_init(var->forks + i, NULL);
+	sem_unlink(name);
+	sem_out = sem_open(name, O_CREAT, 0666, value);
+	if (sem_out == SEM_FAILED)
+		error_put_exit();
+	return (sem_out);
 }
 
 /**
@@ -45,16 +46,6 @@ static void	init_philos_ext(t_var *var, t_phi *phi, int i)
 	phi->is_eat = 0;
 	phi->is_sle = 0;
 	phi->t_last_meal = t_convert_mil(var->time);
-	if (i == 0)
-	{
-		phi->f_left = var->forks + (var->n_philo - 1);
-		phi->f_right = var->forks + i;
-	}
-	else
-	{
-		phi->f_left = var->forks + i - 1;
-		phi->f_right = var->forks + i;
-	}
 	pthread_create(&(phi->thread), NULL, &phi_core, (void *)phi);
 }
 
@@ -91,9 +82,9 @@ void	init_all(t_var *var, int argc, char **argv)
 	i = 0;
 	var->is_dead = 0;
 	var->time = t_get_now();
-	pthread_mutex_init(&(var->m_diying), NULL);
-	pthread_mutex_init(&(var->m_printing), NULL);
-	init_forks(var);
+	var->s_diying = init_semaphore("s_dying", 1);
+	var->s_printing = init_semaphore("s_printing", 1);
+	var->s_forks = init_semaphore("s_forks", var->n_philo);
 	init_philos(var);
 	check_dead(var);
 }

@@ -6,7 +6,7 @@
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 16:58:07 by aguiri            #+#    #+#             */
-/*   Updated: 2022/12/02 23:08:00 by aguiri           ###   ########.fr       */
+/*   Updated: 2022/12/04 00:59:33 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 */
 static void	phi_eat(t_phi *phi)
 {
-	pthread_mutex_lock(phi->f_left);
+	sem_wait(phi->var->s_forks);
 	print_action(phi, "has taken a fork");
-	pthread_mutex_lock(phi->f_right);
+	sem_wait(phi->var->s_forks);
 	print_action(phi, "has taken a fork");
 	phi->t_last_meal = t_get_mil();
 	phi->is_eat = 1;
@@ -29,8 +29,8 @@ static void	phi_eat(t_phi *phi)
 	t_usleep(phi->var->t_eat);
 	phi->n_lunch++;
 	phi->is_eat = 0;
-	pthread_mutex_unlock(phi->f_left);
-	pthread_mutex_unlock(phi->f_right);
+	sem_post(phi->var->s_forks);
+	sem_post(phi->var->s_forks);
 }
 
 /**

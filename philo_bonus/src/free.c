@@ -6,7 +6,7 @@
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 15:27:55 by aguiri            #+#    #+#             */
-/*   Updated: 2022/12/02 22:59:21 by aguiri           ###   ########.fr       */
+/*   Updated: 2022/12/04 01:30:43 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@ void	free_all(t_var *var)
 
 	t_usleep(100);
 	i = -1;
-	while (++i < var->n_philo)
-		pthread_mutex_destroy(var->forks + i);
-	pthread_mutex_destroy(&var->m_printing);
-	pthread_mutex_destroy(&var->m_diying);
+	sem_unlink("diying");
+	sem_close(var->s_diying);
+	sem_unlink("printing");
+	sem_close(var->s_printing);
+	sem_unlink("forks");
+	sem_close(var->s_forks);
 	free(var->phi);
-	free(var->forks);
 	free(var);
 }

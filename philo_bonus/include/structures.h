@@ -6,7 +6,7 @@
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:23:39 by aguiri            #+#    #+#             */
-/*   Updated: 2022/12/02 13:47:23 by aguiri           ###   ########.fr       */
+/*   Updated: 2022/12/04 00:38:28 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <sys/time.h>
 # include <pthread.h>
+# include <semaphore.h>
 
 // ****************************************************************************
 // Structures
@@ -32,8 +33,6 @@ typedef struct s_phi {
 	size_t			t_last_meal;
 
 	pthread_t		thread;
-	pthread_mutex_t	*f_left;
-	pthread_mutex_t	*f_right;
 }				t_phi;
 
 /**
@@ -47,11 +46,11 @@ typedef struct s_var {
 	int				t_sle;
 
 	int				is_dead;
-	pthread_mutex_t	m_diying;
-	pthread_mutex_t	m_printing;
+	sem_t			*s_diying;
+	sem_t			*s_printing;
+	sem_t			*s_forks;
 
 	t_phi			*phi;
-	pthread_mutex_t	*forks;
 
 	struct timeval	time;
 }					t_var;
