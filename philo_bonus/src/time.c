@@ -5,42 +5,47 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aguiri <aguiri@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/23 13:18:12 by aguiri            #+#    #+#             */
-/*   Updated: 2022/12/02 22:58:44 by aguiri           ###   ########.fr       */
+/*   Created: 2023/04/01 11:29:15 by aguiri            #+#    #+#             */
+/*   Updated: 2023/04/01 11:29:15 by aguiri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo_bonus.h"
 
-struct timeval	t_get_now(void)
+/* get_time_in_ms:
+*	Gets the current time in miliseconds since the Epoch (1970-01-01 00:00:00).
+*	Returns the time value.
+*/
+time_t	get_time_in_ms(void)
 {
-	struct timeval	time;
+	struct timeval		tv;
 
-	if (gettimeofday(&time, NULL) == -1)
-		error_put_exit();
-	return (time);
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-size_t	t_convert_mil(struct timeval time)
+/* philo_sleep:
+*	Pauses the philosopher process for a certain amount of time in miliseconds.
+*/
+void	philo_sleep(time_t sleep_time)
 {
-	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+	time_t	wake_up;
+
+	wake_up = get_time_in_ms() + sleep_time;
+	while (get_time_in_ms() < wake_up)
+	{
+		usleep(100);
+	}
 }
 
-size_t	t_get_mil(void)
+/* sim_start_delay:
+*	Waits for a small delay at the beginning of each process execution
+*	so that all processes start at the same time with the same start time
+*	reference. This ensures all processes and the grim reaper threads are
+*	synchronized.
+*/
+void	sim_start_delay(time_t start_time)
 {
-	return (t_convert_mil(t_get_now()));
-}
-
-size_t	t_get_mil_start(t_var *var)
-{
-	return (t_get_mil() - t_convert_mil(var->time));
-}
-
-void	t_usleep(size_t	t_to_wait)
-{
-	size_t	t_start;
-
-	t_start = t_get_mil();
-	while (t_to_wait + t_start > t_get_mil())
-		usleep(t_to_wait * 10);
+	while (get_time_in_ms() < start_time)
+		continue ;
 }
